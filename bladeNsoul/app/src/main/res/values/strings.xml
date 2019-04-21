@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">혜자패키지</string>
+    <string name="base_url">http://ec2-18-221-220-138.us-east-2.compute.amazonaws.com:8080/</string>
+    <!--<string name="base_url">http://192.168.0.5:8080/</string>-->
+    <string name="context_path">project_c</string>
+    <string name="download_api">/download/json/</string>
+    <string name="checksum_api">/checksum/json/</string>
+    <string name="json_path">json</string>
+    <string name="main_json">main.json</string>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameMainActivity">
+
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/main_textview"
+        android:background="@android:color/darker_gray"
+        app:scale_base_height="3000"
+        app:scale_base_width="2000">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_height="3000"
+        app:scale_left="0"
+        app:scale_top="0"
+        app:scale_width="2000">>
+        <com.ssomai.android.scalablelayout.ScalableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/main_textview"
+            android:background="@android:color/darker_gray"
+            app:scale_base_height="3000"
+            app:scale_base_width="2000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:scale_height="5000"
+            app:scale_left="0"
+            app:scale_top="-1000"
+            app:scale_width="2000">
+
+            <com.ssomai.android.scalablelayout.ScalableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/main_textview"
+                android:background="@android:color/darker_gray"
+                app:scale_base_height="3000"
+                app:scale_base_width="2000">
+
+                <ImageView
+                    android:id="@+id/blade_and_soul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/blade_and_soul"
+                    app:scale_height="1000"
+                    app:scale_left="0"
+                    app:scale_top="0"
+                    app:scale_width="2000"/>
+
+                <ImageView
+                    android:id="@+id/epic_seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/epic_seven"
+                    app:scale_height="1000"
+                    app:scale_left="0"
+                    app:scale_top="800"
+                    app:scale_width="2000"/>/>
+
+                <ImageView
+                    android:id="@+id/brown_dust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    app:srcCompat="@drawable/brown_dust"
+                    app:scale_height="1000"
+                    app:scale_left="0"
+                    app:scale_top="1600"
+                    app:scale_width="2000"/>/>
+
+                <ImageView
+                    android:id="@+id/summoners_war"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    app:srcCompat="@drawable/summoners_war"
+                    app:scale_height="1000"
+                    app:scale_left="0"
+                    app:scale_top="2400"
+                    app:scale_width="2000"/>/>
+            </com.ssomai.android.scalablelayout.ScalableLayout>
+
+        </LinearLayout>
+        </com.ssomai.android.scalablelayout.ScalableLayout>
+
+
+    </ScrollView>
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+
+</LinearLayout>

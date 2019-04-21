@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_rate_package_border"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/packageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="4pt"
+        android:layout_marginRight="4pt"
+        android:layout_marginTop="4pt"
+        android:background="@drawable/package_border"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/packageName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/applicgothicneob"
+                android:gravity="center|left"
+                android:paddingLeft="6dp"
+                android:paddingRight="20dp"
+                android:text="패키지명"
+                android:textColor="#303030"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="6dp"
+                    android:text="\uFFE6" />
+
+                <TextView
+                    android:id="@+id/packagePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothicneoul"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="20dp"
+                    android:text="100,000"
+                    android:textSize="19sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/efficient"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/gothicneoul"
+            android:gravity="center_vertical|right"
+            android:text="효율"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/percentView"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|right"
+            android:text="%"
+            android:textSize="19sp" />
+        <ImageView
+            android:id="@+id/expandCircle"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/downcircle" />
+
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/countLimitPanel"
+        android:layout_width="65dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="right|top"
+        android:src="@drawable/count_limit" />
+
+    <ImageView
+        android:id="@+id/divideProductPanel"
+        android:layout_width="65dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="85dp"
+        android:src="@drawable/divide_product" />
+    <ImageView
+        android:id="@+id/timeLimitPanel"
+        android:layout_width="65dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="155dp"
+        android:layout_gravity="right|top"
+        android:src="@drawable/time_limit" />
+</FrameLayout>
+
+</android.support.v7.widget.CardView>

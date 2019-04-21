@@ -1,0 +1,109 @@
+package com.effective.apackage.packageeffective.utilities;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.effective.apackage.packageeffective.domain.ItemValue;
+import com.effective.apackage.packageeffective.domain.PackageValue;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class packageJsonUtil {
+
+    public static ArrayList<PackageValue> getPackageStringsFromJson(Context context, String gameName)
+            throws JSONException {
+
+        String epicJson = "[{\"name\":\"골드 패키지1\",\"price\":33000,\"value\":1.0,\"etc\":\"월 10회\",\"items\":[{\"name\":\"골드 패키지1\",\"value\":1.0,\"count\":900},{\"name\":\"골드 패키지1\",\"value\":1.0,\"count\":650000}]},{\"name\":\"골드 패키지2\",\"price\":110000,\"value\":1.0,\"etc\":\"월 10회\",\"items\":[{\"name\":\"골드 패키지2\",\"value\":1.0,\"count\":3000},{\"name\":\"골드 패키지2\",\"value\":1.0,\"count\":2500000}]},{\"name\":\"랭크업 패키지\",\"price\":33000,\"value\":1.0,\"etc\":\"계정당 1회(1000개 지급후 순차적 지급)\",\"items\":[{\"name\":\"랭크업 패키지\",\"value\":1.0,\"count\":3000}]},{\"name\":\"생명의 패키지1\",\"price\":11000,\"value\":1.0,\"etc\":\"월 5회\",\"items\":[{\"name\":\"생명의 패키지1\",\"value\":1.0,\"count\":150},{\"name\":\"생명의 패키지1\",\"value\":1.0,\"count\":6}]},{\"name\":\"생명의 패키지2\",\"price\":33000,\"value\":1.0,\"etc\":\"월 5회\",\"items\":[{\"name\":\"생명의 패키지2\",\"value\":1.0,\"count\":450},{\"name\":\"생명의 패키지2\",\"value\":1.0,\"count\":22}]},{\"name\":\"월소환 패키지1\",\"price\":33000,\"value\":1.0,\"etc\":\"월 10회\",\"items\":[{\"name\":\"월소환 패키지1\",\"value\":1.0,\"count\":900},{\"name\":\"월소환 패키지1\",\"value\":1.0,\"count\":10}]},{\"name\":\"월소환 패키지2\",\"price\":110000,\"value\":1.0,\"etc\":\"월 10회\",\"items\":[{\"name\":\"월소환 패키지2\",\"value\":1.0,\"count\":3000},{\"name\":\"월소환 패키지2\",\"value\":1.0,\"count\":70}]},{\"name\":\"월정액 패키지\",\"price\":5500,\"value\":1.0,\"etc\":\"월 1회, 일시불로 계산\",\"items\":[{\"name\":\"월정액 패키지\",\"value\":1.0,\"count\":800},{\"name\":\"월정액 패키지\",\"value\":1.0,\"count\":1}]},{\"name\":\"웰컴 패키지\",\"price\":3300,\"value\":1.0,\"etc\":\"계정당 1회(펭귄 제외)\",\"items\":[{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":10},{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":90},{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":100000},{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":1},{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":1},{\"name\":\"웰컴 패키지\",\"value\":1.0,\"count\":1}]},{\"name\":\"육성 패키지1\",\"price\":33000,\"value\":1.0,\"etc\":\"월 3회\",\"items\":[{\"name\":\"육성 패키지1\",\"value\":1.0,\"count\":10},{\"name\":\"육성 패키지1\",\"value\":1.0,\"count\":3}]},{\"name\":\"육성 패키지2\",\"price\":55000,\"value\":1.0,\"etc\":\"월 3회\",\"items\":[{\"name\":\"육성 패키지2\",\"value\":1.0,\"count\":5},{\"name\":\"육성 패키지2\",\"value\":1.0,\"count\":1}]}]";
+        String brownJson = "[{\"name\":\"드웬의 명예 패키지\",\"price\":36400,\"value\":1.0,\"etc\":\"주 1회 구매\",\"items\":[{\"name\":\"드웬의 명예 패키지\",\"value\":1.0,\"count\":1000},{\"name\":\"드웬의 명예 패키지\",\"value\":1.0,\"count\":2500}]},{\"name\":\"레벨업패키지(luxury)\",\"price\":55000,\"value\":1.0,\"etc\":\"계정당 1회\",\"items\":[{\"name\":\"레벨업패키지(luxury)\",\"value\":1.0,\"count\":6350},{\"name\":\"레벨업패키지(luxury)\",\"value\":1.0,\"count\":1}]},{\"name\":\"레벨업패키지(standard)\",\"price\":33000,\"value\":1.0,\"etc\":\"계정당 1회\",\"items\":[{\"name\":\"레벨업패키지(standard)\",\"value\":1.0,\"count\":4290},{\"name\":\"레벨업패키지(standard)\",\"value\":1.0,\"count\":1}]},{\"name\":\"브린이패쓰패키지(공격형)\",\"price\":130000,\"value\":1.0,\"etc\":\"계정당 3회\",\"items\":[{\"name\":\"브린이패쓰패키지(공격형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(공격형)\",\"value\":1.0,\"count\":20},{\"name\":\"브린이패쓰패키지(공격형)\",\"value\":1.0,\"count\":500},{\"name\":\"브린이패쓰패키지(공격형)\",\"value\":1.0,\"count\":600},{\"name\":\"브린이패쓰패키지(공격형)\",\"value\":1.0,\"count\":5}]},{\"name\":\"브린이패쓰패키지(마법형)\",\"price\":130000,\"value\":1.0,\"etc\":\"계정당 3회\",\"items\":[{\"name\":\"브린이패쓰패키지(마법형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(마법형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(마법형)\",\"value\":1.0,\"count\":20},{\"name\":\"브린이패쓰패키지(마법형)\",\"value\":1.0,\"count\":500},{\"name\":\"브린이패쓰패키지(마법형)\",\"value\":1.0,\"count\":600}]},{\"name\":\"브린이패쓰패키지(방어형)\",\"price\":130000,\"value\":1.0,\"etc\":\"계정당 3회\",\"items\":[{\"name\":\"브린이패쓰패키지(방어형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(방어형)\",\"value\":1.0,\"count\":600},{\"name\":\"브린이패쓰패키지(방어형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(방어형)\",\"value\":1.0,\"count\":20},{\"name\":\"브린이패쓰패키지(방어형)\",\"value\":1.0,\"count\":500}]},{\"name\":\"브린이패쓰패키지(지원형)\",\"price\":130000,\"value\":1.0,\"etc\":\"계정당 3회\",\"items\":[{\"name\":\"브린이패쓰패키지(지원형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(지원형)\",\"value\":1.0,\"count\":5},{\"name\":\"브린이패쓰패키지(지원형)\",\"value\":1.0,\"count\":20},{\"name\":\"브린이패쓰패키지(지원형)\",\"value\":1.0,\"count\":500},{\"name\":\"브린이패쓰패키지(지원형)\",\"value\":1.0,\"count\":600}]},{\"name\":\"월정액 패키지1\",\"price\":11000,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"월정액 패키지1\",\"value\":1.0,\"count\":1200}]},{\"name\":\"월정액 패키지2\",\"price\":33000,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"월정액 패키지2\",\"value\":1.0,\"count\":1800},{\"name\":\"월정액 패키지2\",\"value\":1.0,\"count\":20}]},{\"name\":\"전설계약서 패키지\",\"price\":31200,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"전설계약서 패키지\",\"value\":1.0,\"count\":300000},{\"name\":\"전설계약서 패키지\",\"value\":1.0,\"count\":10}]},{\"name\":\"전설계약서패키지\",\"price\":22000,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":1000000},{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":1000},{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":50},{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":20},{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":2},{\"name\":\"전설계약서패키지\",\"value\":1.0,\"count\":10000}]},{\"name\":\"초보탈출 축하 패키지\",\"price\":11000,\"value\":1.0,\"etc\":\"계정당 1회\",\"items\":[{\"name\":\"초보탈출 축하 패키지\",\"value\":1.0,\"count\":600},{\"name\":\"초보탈출 축하 패키지\",\"value\":1.0,\"count\":10},{\"name\":\"초보탈출 축하 패키지\",\"value\":1.0,\"count\":200000}]},{\"name\":\"해피할로윈패키지1\",\"price\":78000,\"value\":1.0,\"etc\":\"기간한정\",\"items\":[{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":10},{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":1},{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":30},{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":600000},{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":1500},{\"name\":\"해피할로윈패키지1\",\"value\":1.0,\"count\":50}]},{\"name\":\"해피할로윈패키지2\",\"price\":156000,\"value\":1.0,\"etc\":\"기간한정\",\"items\":[{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":15},{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":30},{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":1200000},{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":3000},{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":100},{\"name\":\"해피할로윈패키지2\",\"value\":1.0,\"count\":1}]}]";
+        String summonnersJson = "[{\"name\":\"각성 주문서 팩\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"각성 주문서 팩\",\"value\":1.0,\"count\":72000},{\"name\":\"각성 주문서 팩\",\"value\":1.0,\"count\":500},{\"name\":\"각성 주문서 팩\",\"value\":1.0,\"count\":1}]},{\"name\":\"각인된 소환석 팩1\",\"price\":11000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"각인된 소환석 팩1\",\"value\":1.0,\"count\":24000},{\"name\":\"각인된 소환석 팩1\",\"value\":1.0,\"count\":225},{\"name\":\"각인된 소환석 팩1\",\"value\":1.0,\"count\":60}]},{\"name\":\"각인된 소환석 팩2\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"각인된 소환석 팩2\",\"value\":1.0,\"count\":72000},{\"name\":\"각인된 소환석 팩2\",\"value\":1.0,\"count\":700},{\"name\":\"각인된 소환석 팩2\",\"value\":1.0,\"count\":180}]},{\"name\":\"각인된 소환석 팩3\",\"price\":55000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"각인된 소환석 팩3\",\"value\":1.0,\"count\":120000},{\"name\":\"각인된 소환석 팩3\",\"value\":1.0,\"count\":1300},{\"name\":\"각인된 소환석 팩3\",\"value\":1.0,\"count\":320}]},{\"name\":\"각인된 소환석 팩4\",\"price\":110000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"각인된 소환석 팩4\",\"value\":1.0,\"count\":240000},{\"name\":\"각인된 소환석 팩4\",\"value\":1.0,\"count\":2800},{\"name\":\"각인된 소환석 팩4\",\"value\":1.0,\"count\":700}]},{\"name\":\"데빌몬 패키지\",\"price\":55000,\"value\":1.0,\"etc\":\"일주일 한정판매\",\"items\":[{\"name\":\"데빌몬 패키지\",\"value\":1.0,\"count\":50000},{\"name\":\"데빌몬 패키지\",\"value\":1.0,\"count\":750},{\"name\":\"데빌몬 패키지\",\"value\":1.0,\"count\":3},{\"name\":\"데빌몬 패키지\",\"value\":1.0,\"count\":2}]},{\"name\":\"데일리팩1\",\"price\":5500,\"value\":0.0,\"etc\":\"15일 분할패키지 (일시불받은걸로 계산)\",\"items\":[{\"name\":\"데일리팩1\",\"value\":0.0,\"count\":1},{\"name\":\"데일리팩1\",\"value\":0.0,\"count\":300},{\"name\":\"데일리팩1\",\"value\":0.0,\"count\":1}]},{\"name\":\"데일리팩2\",\"price\":33000,\"value\":1.0,\"etc\":\"15일 분할패키지 (일시불받은걸로 계산)\",\"items\":[{\"name\":\"데일리팩2\",\"value\":1.0,\"count\":15},{\"name\":\"데일리팩2\",\"value\":1.0,\"count\":500},{\"name\":\"데일리팩2\",\"value\":1.0,\"count\":1},{\"name\":\"데일리팩2\",\"value\":1.0,\"count\":450}]},{\"name\":\"룬 해제 팩\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한, \",\"items\":[{\"name\":\"룬 해제 팩\",\"value\":1.0,\"count\":72000},{\"name\":\"룬 해제 팩\",\"value\":1.0,\"count\":500},{\"name\":\"룬 해제 팩\",\"value\":1.0,\"count\":1}]},{\"name\":\"룬팩1\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"룬팩1\",\"value\":1.0,\"count\":72000},{\"name\":\"룬팩1\",\"value\":1.0,\"count\":500},{\"name\":\"룬팩1\",\"value\":1.0,\"count\":4}]},{\"name\":\"룬팩2\",\"price\":66000,\"value\":0.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"룬팩2\",\"value\":0.0,\"count\":144000},{\"name\":\"룬팩2\",\"value\":0.0,\"count\":1400},{\"name\":\"룬팩2\",\"value\":0.0,\"count\":8}]},{\"name\":\"룬팩3\",\"price\":110000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"룬팩3\",\"value\":1.0,\"count\":240000},{\"name\":\"룬팩3\",\"value\":1.0,\"count\":2800},{\"name\":\"룬팩3\",\"value\":1.0,\"count\":18}]},{\"name\":\"마나석 팩1\",\"price\":11000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"마나석 팩1\",\"value\":1.0,\"count\":400000},{\"name\":\"마나석 팩1\",\"value\":1.0,\"count\":225},{\"name\":\"마나석 팩1\",\"value\":1.0,\"count\":60}]},{\"name\":\"마나석 팩2\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"마나석 팩2\",\"value\":1.0,\"count\":1200000},{\"name\":\"마나석 팩2\",\"value\":1.0,\"count\":700},{\"name\":\"마나석 팩2\",\"value\":1.0,\"count\":90}]},{\"name\":\"마나석 팩3\",\"price\":55000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"마나석 팩3\",\"value\":1.0,\"count\":2100000},{\"name\":\"마나석 팩3\",\"value\":1.0,\"count\":1300},{\"name\":\"마나석 팩3\",\"value\":1.0,\"count\":120}]},{\"name\":\"마나석 팩4\",\"price\":110000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"마나석 팩4\",\"value\":1.0,\"count\":4500000},{\"name\":\"마나석 팩4\",\"value\":1.0,\"count\":2800},{\"name\":\"마나석 팩4\",\"value\":1.0,\"count\":150}]},{\"name\":\"마력의정수 팩\",\"price\":0,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"마력의정수 팩\",\"value\":1.0,\"count\":5},{\"name\":\"마력의정수 팩\",\"value\":1.0,\"count\":15},{\"name\":\"마력의정수 팩\",\"value\":1.0,\"count\":30}]},{\"name\":\"복귀 환영패키지1\",\"price\":33000,\"value\":1.0,\"etc\":\"복귀 1회 한정 (복귀 후 5일 내)\",\"items\":[{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":3},{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":1000},{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지1\",\"value\":1.0,\"count\":6}]},{\"name\":\"복귀 환영패키지2\",\"price\":110000,\"value\":1.0,\"etc\":\"복귀 1회 한정 (복귀 후 5일 내)\",\"items\":[{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":3250},{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":6},{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":1},{\"name\":\"복귀 환영패키지2\",\"value\":1.0,\"count\":1}]},{\"name\":\"빛어둠 소환팩1\",\"price\":33000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"빛어둠 소환팩1\",\"value\":1.0,\"count\":72000},{\"name\":\"빛어둠 소환팩1\",\"value\":1.0,\"count\":700},{\"name\":\"빛어둠 소환팩1\",\"value\":1.0,\"count\":50}]},{\"name\":\"빛어둠 소환팩2\",\"price\":55000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"빛어둠 소환팩2\",\"value\":1.0,\"count\":120000},{\"name\":\"빛어둠 소환팩2\",\"value\":1.0,\"count\":1200},{\"name\":\"빛어둠 소환팩2\",\"value\":1.0,\"count\":85}]},{\"name\":\"빛어둠 소환팩3\",\"price\":77000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"빛어둠 소환팩3\",\"value\":1.0,\"count\":168000},{\"name\":\"빛어둠 소환팩3\",\"value\":1.0,\"count\":1800},{\"name\":\"빛어둠 소환팩3\",\"value\":1.0,\"count\":120}]},{\"name\":\"빛어둠 소환팩4\",\"price\":110000,\"value\":1.0,\"etc\":\"월3회 구매제한\",\"items\":[{\"name\":\"빛어둠 소환팩4\",\"value\":1.0,\"count\":240000},{\"name\":\"빛어둠 소환팩4\",\"value\":1.0,\"count\":2800},{\"name\":\"빛어둠 소환팩4\",\"value\":1.0,\"count\":175}]},{\"name\":\"소환팩\",\"price\":0,\"value\":1.0,\"etc\":\"\",\"items\":[{\"name\":\"소환팩\",\"value\":1.0,\"count\":3},{\"name\":\"소환팩\",\"value\":1.0,\"count\":1},{\"name\":\"소환팩\",\"value\":1.0,\"count\":30000}]},{\"name\":\"월간 보너스1\",\"price\":11000,\"value\":1.0,\"etc\":\"월간 10회 구매제한\",\"items\":[{\"name\":\"월간 보너스1\",\"value\":1.0,\"count\":1},{\"name\":\"월간 보너스1\",\"value\":1.0,\"count\":10000},{\"name\":\"월간 보너스1\",\"value\":1.0,\"count\":250}]},{\"name\":\"월간 보너스2\",\"price\":22000,\"value\":1.0,\"etc\":\"월간 10회 구매제한\",\"items\":[{\"name\":\"월간 보너스2\",\"value\":1.0,\"count\":2},{\"name\":\"월간 보너스2\",\"value\":1.0,\"count\":20000},{\"name\":\"월간 보너스2\",\"value\":1.0,\"count\":500}]},{\"name\":\"월간 보너스3\",\"price\":55000,\"value\":1.0,\"etc\":\"월간 10회 구매제한\",\"items\":[{\"name\":\"월간 보너스3\",\"value\":1.0,\"count\":3},{\"name\":\"월간 보너스3\",\"value\":1.0,\"count\":30000},{\"name\":\"월간 보너스3\",\"value\":1.0,\"count\":1400}]},{\"name\":\"월간 보너스4\",\"price\":110000,\"value\":1.0,\"etc\":\"월간 10회 구매제한\",\"items\":[{\"name\":\"월간 보너스4\",\"value\":1.0,\"count\":5},{\"name\":\"월간 보너스4\",\"value\":1.0,\"count\":50000},{\"name\":\"월간 보너스4\",\"value\":1.0,\"count\":3000},{\"name\":\"월간 보너스4\",\"value\":1.0,\"count\":1}]},{\"name\":\"태고의 패키지\",\"price\":33000,\"value\":1.0,\"etc\":\"일주일 한정, 10회구매제한\",\"items\":[{\"name\":\"태고의 패키지\",\"value\":1.0,\"count\":50000},{\"name\":\"태고의 패키지\",\"value\":1.0,\"count\":750},{\"name\":\"태고의 패키지\",\"value\":1.0,\"count\":50},{\"name\":\"태고의 패키지\",\"value\":1.0,\"count\":5}]},{\"name\":\"프리미엄팩\",\"price\":0,\"value\":0.0,\"etc\":\"\",\"items\":[{\"name\":\"프리미엄팩\",\"value\":0.0,\"count\":11},{\"name\":\"프리미엄팩\",\"value\":0.0,\"count\":3},{\"name\":\"프리미엄팩\",\"value\":0.0,\"count\":100000}]},{\"name\":\"형상변환 패키지\",\"price\":110000,\"value\":1.0,\"etc\":\"일주일 한정판매\",\"items\":[{\"name\":\"형상변환 패키지\",\"value\":1.0,\"count\":50000},{\"name\":\"형상변환 패키지\",\"value\":1.0,\"count\":500},{\"name\":\"형상변환 패키지\",\"value\":1.0,\"count\":50},{\"name\":\"형상변환 패키지\",\"value\":1.0,\"count\":5}]}]";
+        String bnsJson = "[\n" +
+                "  {\n" +
+                "    \"name\": \"블소는 아직임\",\n" +
+                "    \"price\": 33000,\n" +
+                "    \"value\": 1.0,\n" +
+                "    \"etc\": \"월 10회\",\n" +
+                "    \"items\": [\n" +
+                "      {\n" +
+                "        \"name\": \"골드 패키지1\",\n" +
+                "        \"value\": 1.0,\n" +
+                "        \"count\": 900\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"골드 패키지1\",\n" +
+                "        \"value\": 1.0,\n" +
+                "        \"count\": 650000\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }\n" +
+                "]";
+        JSONArray gamePackageJson = null;
+
+        Log.d("boss", gameName);
+
+        if (gameName.equals( "epic_seven")) {
+            gamePackageJson = new JSONArray(epicJson);
+        } else if (gameName.equals( "brown_dust")) {
+            gamePackageJson = new JSONArray(brownJson);
+        } else if (gameName.equals("summoners_war")) {
+            gamePackageJson = new JSONArray(summonnersJson);
+        }else{
+            gamePackageJson = new JSONArray(bnsJson);
+        }
+
+
+
+        Log.d("boss", gamePackageJson.toString());
+        Log.d("boss", "size" + gamePackageJson.length());
+
+
+        ArrayList<PackageValue> packageValueList = new ArrayList<>();
+
+        for (int i = 0; i < gamePackageJson.length(); i++) {
+            Log.d("boss", "com");
+
+            PackageValue packageValue = new PackageValue();
+            String name;
+            String value;
+            String price;
+            ArrayList<ItemValue> itemValues = new ArrayList<>();
+
+            JSONObject packageObject = gamePackageJson.getJSONObject(i);
+
+
+            JSONArray itemsJson = packageObject.getJSONArray("items");
+            Log.d("boss", itemsJson.toString());
+
+            for (int j = 0; j < itemsJson.length(); j++) {
+
+                ItemValue itemValue = new ItemValue();
+
+                itemValue.setItemCount(itemsJson.getJSONObject(j).getDouble("count"));
+                itemValue.setItemName(itemsJson.getJSONObject(j).getString("name"));
+                itemValue.setItemValue(itemsJson.getJSONObject(j).getDouble("value"));
+
+                itemValues.add(itemValue);
+            }
+
+
+            packageValue.setPackageName(packageObject.getString("name"));
+            packageValue.setPackageValue(Double.parseDouble(packageObject.getString("value")));
+            packageValue.setPackagePrice(Integer.parseInt(packageObject.getString("price")));
+            packageValue.setEtc(packageObject.getString("etc"));
+            packageValue.setItemValues(itemValues);
+
+
+            Log.d("boss", "리스트 " + packageValueList.toString());
+            packageValueList.add(packageValue);
+        }
+
+        return packageValueList;
+    }
+}

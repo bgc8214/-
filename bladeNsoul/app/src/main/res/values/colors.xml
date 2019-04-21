@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#262626</color>
+    <color name="colorAccent">#262626</color>
+    <color name="backGround">#A9D0F5</color>
+    <color name="SearchBackGround">#EDEDED</color>
+    <color name="efficientColor10">#F43600</color>
+    <color name="efficientColor30">#F15900</color>
+    <color name="efficientColor50">#F09400</color>
+
+    <color name="mainColor">#262626</color>
+
+</resources>
